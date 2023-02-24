@@ -1,20 +1,14 @@
 package reseaux_bus ;
 public class Ligne {
-	private int id;
-	private int numero;
+	private Double numero;
 	private String destination;
 
-	public Ligne(int id, int numero, String destination) {
-		super();
-		this.id = id;
+	public Ligne(Double numero, String destination) {
 		this.numero = numero;
 		this.destination = destination;
 	}
-	public int getId() {
-		return id;
-	}
 
-	public int getNumero() {
+	public Double getNumero() {
 		return numero;
 	}
 
@@ -22,11 +16,8 @@ public class Ligne {
 		return destination;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Double numero) {
 		this.numero = numero;
 	}
 
