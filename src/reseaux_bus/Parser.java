@@ -259,7 +259,24 @@ public class Parser {
     public static void displayArret(ArrayList<Arret> tabArret){
         for(Arret object:tabArret){
             System.out.print(object.getNom());
-            System.out.println(object.getLigne());
+            System.out.print(object.getLigne());
+            if(object.getListArretVoisin().size()==1)
+                System.out.println(object.getListArretVoisin().get(0).getNom());
+            if((object.getListArretVoisin().size()==2)) {
+                System.out.print(object.getListArretVoisin().get(0).getNom()+" ");
+                System.out.println(object.getListArretVoisin().get(1).getNom());
+            }
+            if((object.getListArretVoisin().size()==3)) {
+                System.out.print(object.getListArretVoisin().get(0).getNom()+" ");
+                System.out.print(object.getListArretVoisin().get(1).getNom()+" ");
+                System.out.println(object.getListArretVoisin().get(3).getNom());
+            }
+            if((object.getListArretVoisin().size()==4)) {
+                System.out.print(object.getListArretVoisin().get(0).getNom()+" ");
+                System.out.print(object.getListArretVoisin().get(1).getNom()+" ");
+                System.out.print(object.getListArretVoisin().get(3).getNom()+" ");
+                System.out.println(object.getListArretVoisin().get(4).getNom());
+            }
         }
     }
     public static void displayLigne(ArrayList<Ligne> tabLigne){
@@ -275,6 +292,24 @@ public class Parser {
                     }
                     System.out.println();
                 }
+            }
+
+            public ArrayList<Arret> fusionArret(ArrayList<Arret> list1, ArrayList<Arret> list2){
+                ArrayList<Arret> list = new ArrayList<>();
+                for(Arret arret2:list2){
+                    if(!list.contains(arret2)){
+                        list.add(arret2);
+                    }
+                    for(Arret arret1:list1){
+                        if (arret1.getNom().equals(arret2.getNom())){
+                            list.get(list.indexOf(arret2)).add(arret1.getLigne().get(0));
+                        } else if (!list.contains(arret1)) {
+                            list.add(arret1);
+                        }
+                    }
+                }
+
+                return list;
             }
 
 

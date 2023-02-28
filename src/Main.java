@@ -17,18 +17,25 @@ public class Main {
 
         ArrayList<Arret> listArret1 = new ArrayList<Arret>(parser.parseStop(path1,1)) ;
         ArrayList<Arret> listArret2 = new ArrayList<Arret>(parser.parseStop(path2,2)) ;
+        ArrayList<Arret> listArret = new ArrayList<Arret>(parser.fusionArret(listArret1,listArret2)) ;
 
         ArrayList<ArrayList<Horaire>> listHoraire1 = new ArrayList<ArrayList<Horaire>>(parser.parseLigne1Horaire(path1, listArret1, ligne1));
         ArrayList<ArrayList<Horaire>> listHoraire2 = new ArrayList<ArrayList<Horaire>>(parser.parseLigne2Horaire(path2, listArret2, ligne2));
 
-
         //test
         //parser.displayArret(listArret2);
-        Parser.displayListHoraire(listHoraire2);
+        //Parser.displayListHoraire(listHoraire2);
+
+
+        for(int i=0; i<listArret.size(); i++){
+            listArret.get(i).setListArretVoisin(listArret1,listArret2);
+        }
+        Parser.displayArret(listArret);
+
 
         /*displayLigne(ligne);
         parser.displayArret(listArret1);
-        parser.displayArret(listArret);
+        ;
         parser.displayListHoraire(listHoraire1);
         System.out.println("");*/
 
