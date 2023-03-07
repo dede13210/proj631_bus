@@ -1,54 +1,35 @@
-import reseaux_bus.Arret;
-import reseaux_bus.Horaire;
+import reseaux_bus.Graph;
 import reseaux_bus.Ligne;
-import reseaux_bus.Parser;
-
-import java.util.ArrayList;
 
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        String path1 = "C:/Users/dede1/Documents/proj631_bus/src/1_Poisy-ParcDesGlaisins.txt";
-        String path2 = "C:/Users/dede1/Documents/proj631_bus/src/2_Piscine-Patinoire_Campus.txt";
-        Parser parser= new Parser();
-        ArrayList<Ligne> ligne1 = new ArrayList<Ligne>(parser.parseDirection(path1));
-        ArrayList<Ligne> ligne2 = new ArrayList<Ligne>(parser.parseDirection(path2));
-        ArrayList<ArrayList<Ligne>> ligne = (parser.fusionLigne(ligne1,ligne2));
+        String path1 = "file/1_Poisy-ParcDesGlaisins.txt";
+        String path2 = "file/2_Piscine-Patinoire_Campus.txt";
 
-        ArrayList<Arret> listArret1 = new ArrayList<Arret>(parser.parseStop(path1,1)) ;
-        ArrayList<Arret> listArret2 = new ArrayList<Arret>(parser.parseStop(path2,2)) ;
-        ArrayList<Arret> listArret = new ArrayList<Arret>(parser.fusionArret(listArret1,listArret2)) ;
+        Ligne ligne1 =new Ligne(null);//on initialise l'objet ligne à null
+        Ligne ligne2= new Ligne(null);
+        ligne1.parseDirection(path1);//on parse la ligne avec le terminus
+        ligne2.parseDirection(path2);
+        Graph reseau1=new Graph();
+        reseau1.parseStop(path1,ligne1);
+        reseau1.parseStop(path2,ligne2);
+        reseau1.setListBusStopVoisin();
+        reseau1.fusionBusStop();
+        reseau1.parseArrete(path1);
+        reseau1.parseArrete(path2);
 
-        ArrayList<ArrayList<Horaire>> listHoraire1 = new ArrayList<ArrayList<Horaire>>(parser.parseLigne1Horaire(path1, listArret1, ligne1));
-        ArrayList<ArrayList<Horaire>> listHoraire2 = new ArrayList<ArrayList<Horaire>>(parser.parseLigne2Horaire(path2, listArret2, ligne2));
+
 
         //test
-        //parser.displayArret(listArret2);
-        //Parser.displayListHoraire(listHoraire2);
-
-
-        for(int i=0; i<listArret.size(); i++){
-            listArret.get(i).setListArretVoisin(listArret1,listArret2);
-        }
-        Parser.displayArret(listArret);
-
-
-        /*displayLigne(ligne);
-        parser.displayArret(listArret1);
-        ;
-        parser.displayListHoraire(listHoraire1);
-        System.out.println("");*/
-
-
-
-
-
-
-
-
+        //reseau1.displayGraph();
+        //System.out.println(reseau1.getListBusStop().size());
+        reseau1.displayArete();
+        /*
+        ligne1.displayLigne();
+        System.out.println(" ");
+        ligne2.displayLigne();
+*/
 
     }
-
-
-
 }
