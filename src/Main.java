@@ -22,7 +22,7 @@ public class Main {
 
 
         //test
-        //reseau1.displayGraph();
+        //reseau1.displayBusStop();
         //System.out.println(reseau1.getListBusStop().size());
         reseau1.displayArete();
         /*
