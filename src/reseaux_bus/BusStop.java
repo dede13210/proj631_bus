@@ -6,15 +6,17 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class BusStop {
-	String nom;
-	ArrayList<Double> ligne;
-	ArrayList<BusStop> listBusStopVoisin;
+public class BusStop implements Comparable<BusStop> {
+	private String nom;
+	private ArrayList<Double> ligne;
+	private ArrayList<BusStop> listBusStopVoisin;
+	private int distance;
 	public BusStop(String nom) {
 		super();
 		this.nom = nom;
 		this.ligne=new ArrayList<Double>();
 		this.listBusStopVoisin =new ArrayList<BusStop>();
+		distance=1;
 		}
 
 	public  void busStopVoisin(@NotNull ArrayList<BusStop> listBusStop){
@@ -70,7 +72,18 @@ public class BusStop {
 		}
 	}
 
+	public int getDistance() {
+		return distance;
+	}
 
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+
+	@Override
+	public int compareTo(@NotNull BusStop o) {
+		return Integer.compare(this.distance,o.getDistance());
+	}
 }
 
 

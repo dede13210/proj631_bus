@@ -23,7 +23,7 @@ public class Main {
         reseau1.parseArrete(path1);
         reseau1.parseArrete(path2);
 
-        //Map<BusStop,Double> gareVernod = reseau1.shortestPath(reseau1.findBusStop("GARE"),reseau1.findBusStop("Vernod"));
+        Map<BusStop,Integer> gareVernod = reseau1.shortestPath(reseau1.findBusStop("Meythet_Le_Rabelais"),reseau1.findBusStop("Vernod"));
 
 
 

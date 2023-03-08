@@ -60,12 +60,12 @@ public class Graph {
                     BusStop busStop3 = new BusStop(busStop2.getNom());
                     busStop3.add(busStop1.getLigne().get(0));
                     busStop3.add(busStop2.getLigne().get(0));
-                    busStop3.addBusStopVoisin(busStop1.listBusStopVoisin.get(0));
+                    busStop3.addBusStopVoisin(busStop1.getListBusStopVoisin().get(0));
                     if (busStop1.getListBusStopVoisin().size() == 2)
-                        busStop3.addBusStopVoisin(busStop1.listBusStopVoisin.get(1));
-                    busStop3.addBusStopVoisin(busStop2.listBusStopVoisin.get(0));
+                        busStop3.addBusStopVoisin(busStop1.getListBusStopVoisin().get(1));
+                    busStop3.addBusStopVoisin(busStop2.getListBusStopVoisin().get(0));
                     if (busStop2.getListBusStopVoisin().size() == 2)
-                        busStop3.addBusStopVoisin(busStop2.listBusStopVoisin.get(1));
+                        busStop3.addBusStopVoisin(busStop2.getListBusStopVoisin().get(1));
                     this.listBusStop.remove(busStop1);
                     this.listBusStop.remove(busStop2);
                     this.listBusStop.add(busStop3);
@@ -422,45 +422,43 @@ public class Graph {
     }
 
     //algo dijkstra avec les distance=1
-    public Map<BusStop,Double> shortestPath(BusStop busStopDepart, BusStop busStopArrivee) {
+    public Map<BusStop, Integer> shortestPath(BusStop busStopDepart, BusStop busStopArrivee) {
         //initialisation
-        BusStop noeudCourant = busStopDepart;
-        double infini = Double.POSITIVE_INFINITY;
-        HashMap<BusStop, Double> noeudDistance = new HashMap<>();
-        ArrayList<BusStop> noeudNonVisite = new ArrayList<>();
-        noeudNonVisite.addAll(this.listBusStop);
-        for (BusStop busStop : this.listBusStop) {
-            noeudDistance.put(busStop, infini);
+        Map<BusStop, Integer> noeudDistance = new HashMap<>();
+        PriorityQueue<BusStop> listDePriorite = new PriorityQueue<>();
+
+        // Initialisation des distances à l'infini sauf pour le point de départ
+        for (BusStop busStop:listBusStop) {
+            noeudDistance.put(busStop, Integer.MAX_VALUE);
         }
-        noeudDistance.put(busStopDepart, 0.0);
-        noeudNonVisite.remove(busStopDepart);
-        double minimum = infini;
-        //Etape 1 mise à jour des distance
-        while (!noeudNonVisite.isEmpty()&&!noeudCourant.equals(busStopArrivee)) {
-            for (BusStop busStop1 : noeudNonVisite) {
-                if (noeudCourant.getListBusStopVoisin().contains(busStop1)) {
-                    noeudDistance.put(busStop1, Math.min(noeudDistance.get(noeudCourant) + 1.0, noeudDistance.get(busStop1)));
-                }
+        noeudDistance.put(busStopDepart, 0);
+        busStopDepart.setDistance(0);
 
-            }
-            for(BusStop busStop:noeudNonVisite){
-                if (noeudDistance.get(busStop) < minimum) {
-                    minimum = noeudDistance.get(busStop);
-                }
-            }
-           //Etape 2 remplacement du neoud courant
-            for (BusStop busStop3 : this.listBusStop) {
-                if (noeudDistance.get(busStop3) < minimum) {
-                    noeudCourant = busStop3;
-                    noeudNonVisite.remove(busStop3);
-                    break;
+        // Ajout du point de départ dans la file de priorité
+        listDePriorite.add(busStopDepart);
+
+        while (!listDePriorite.isEmpty()) {
+            BusStop current = listDePriorite.poll();
+
+            // Parcours des voisins du nœud courant
+            for (BusStop neighbor : current.getListBusStopVoisin()) {
+                BusStop nextNode=new BusStop(neighbor.getNom());
+                nextNode.setListBusStopVoisin(neighbor.getListBusStopVoisin());
+                int newDistance = noeudDistance.get(current) + neighbor.getDistance();
+
+                // Si la nouvelle distance est plus courte, on met à jour la distance et on ajoute le nœud dans la file de priorité
+                if (newDistance < noeudDistance.get(findBusStop(neighbor.getNom()))) {
+                    noeudDistance.put(nextNode, newDistance);
+                    nextNode.setDistance(newDistance);
+                    listDePriorite.add(nextNode);
                 }
             }
-
-
         }
-        HashMap<Double,Double> rep=new HashMap<>();
         return noeudDistance;
+
+
+
+
     }
 }
 
