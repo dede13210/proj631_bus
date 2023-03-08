@@ -89,7 +89,7 @@ public class Graph {
     public ArrayList<Arete> getListArrete() {
         return listArrete;
     }
-    public void displayGraph(){
+    public void displayBusStop(){
         for(BusStop busStop:listBusStop){
             busStop.display();
         }
@@ -101,7 +101,6 @@ public class Graph {
             String[] line0 = scanner1.nextLine().split(" ");
             if(line0[1].equals("+")){
                 scanner1.nextLine();
-                scanner1.nextLine();
                 String line1= scanner1.nextLine();
                 String line2= scanner1.nextLine();
                 String line3= scanner1.nextLine();
@@ -109,12 +108,12 @@ public class Graph {
                 String[] lines2 = line2.split(" ");
                 String[] lines3 = line3.split(" ");
                 //System.out.println(Arrays.toString(lines2));
-                for(int i = 1 ; i<lines1.length ; i++){
+                for(int i = 1 ; i<Math.min(Math.min(lines1.length,lines2.length), lines3.length) ; i++){
                     try{
                         String[] mot1=lines1[i].split(":");
                         String[] mot3=lines3[i].split(":");
                         if(!mot1[0].equals(("-"))&&!mot3[0].equals("-")){
-                            Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines3[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, true);
+                            Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines3[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, true,new Ligne(1.0));
                             this.listArrete.add(arete);
                         }
                     }catch(Exception e) {
@@ -124,7 +123,7 @@ public class Graph {
                         String[] mot2=lines2[i].split(":");
                         String[] mot3=lines3[i].split(":");
                         if(!mot2[0].equals(("-"))&&!mot3[0].equals("-")) {
-                            Arete arete = new Arete(findBusStop(lines2[0]), findBusStop(lines3[0]), new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, true);
+                            Arete arete = new Arete(findBusStop(lines2[0]), findBusStop(lines3[0]), new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, true,new Ligne(1.0));
                             this.listArrete.add(arete);
                         }
                     }catch(Exception e) {
@@ -136,12 +135,12 @@ public class Graph {
 
                     lines1=lines2;
                     lines2=scanner1.nextLine().split(" ");
-                    for(int y = 1 ; y<lines2.length ; y++){
+                    for(int y = 1 ; y<Math.min(lines1.length,lines2.length); y++){
                         String[] mot1=lines1[y].split(":");
                         String[] mot2=lines2[y].split(":");
                         try{
                             if(!mot1[0].equals(("-"))&&!mot2[0].equals("-")){
-                                Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, true);
+                                Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, true,new Ligne(1.0));
                                 this.listArrete.add(arete);
                             }
                         }catch(Exception e) {
@@ -156,12 +155,12 @@ public class Graph {
 
                     lines1=lines2;
                     lines2=scanner1.nextLine().split(" ");
-                    for(int y = 1 ; y<lines2.length ; y++){
+                    for(int y = 1 ; y<Math.min(lines1.length, lines2.length) ; y++){
                         String[] mot1=lines1[y].split(":");
                         String[] mot2=lines2[y].split(":");
                         try{
                             if(!mot1[0].equals(("-"))&&!mot2[0].equals("-")){
-                                Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, true);
+                                Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, true,new Ligne(1.0));
                                 this.listArrete.add(arete);
                             }
                         }catch(Exception e) {
@@ -177,12 +176,12 @@ public class Graph {
                 String[] linesPoisyCollege = lines2;
                 String[] linesLyceePoisy = lineLyceePoisy.split(" ");
                 //System.out.println(Arrays.toString(linesPoisyCollege));
-                for(int i = 1 ; i<lines2.length ; i++){
+                for(int i = 1 ; i<Math.min(Math.min(linesVernod.length,linesPoisyCollege.length), linesLyceePoisy.length) ; i++){
                     try{
                         String[] mot1=linesVernod[i].split(":");
                         String[] mot3=linesPoisyCollege[i].split(":");
                         if(!mot1[0].equals(("-"))&&!mot3[0].equals("-")){
-                            Arete arete = new Arete(findBusStop(linesVernod[0]), findBusStop(linesPoisyCollege[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, true);
+                            Arete arete = new Arete(findBusStop(linesVernod[0]), findBusStop(linesPoisyCollege[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, true,new Ligne(1.0));
                             this.listArrete.add(arete);
                         }
                     }catch(Exception e) {
@@ -192,7 +191,7 @@ public class Graph {
                         String[] mot2=linesVernod[i].split(":");
                         String[] mot3=linesLyceePoisy[i].split(":");
                         if(!mot2[0].equals(("-"))&&!mot3[0].equals("-")) {
-                            Arete arete = new Arete(findBusStop(linesVernod[0]), findBusStop(linesLyceePoisy[0]), new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, true);
+                            Arete arete = new Arete(findBusStop(linesVernod[0]), findBusStop(linesLyceePoisy[0]), new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, true,new Ligne(1.0));
                             this.listArrete.add(arete);
                         }
                     }catch(Exception e) {
@@ -202,35 +201,32 @@ public class Graph {
 
                 scanner1.nextLine();
                 scanner1.nextLine();
-                line1=null;
-                line2=null;
-                line3=null;
-                lines1=null;
-                lines2= null;
-                lines3=null;
-                line1= scanner1.nextLine();
-                line2= scanner1.nextLine();
-                line3= scanner1.nextLine();
-                lines1 = line1.split(" ");
-                lines2 = line2.split(" ");
-                lines3 = line3.split(" ");
-                //System.out.println(Arrays.toString(lines1));
-                for(int i = 1 ; i<lines1.length ; i++){
+                scanner1.nextLine();
+                scanner1.nextLine();
+
+                String line4= scanner1.nextLine();
+                String line5= scanner1.nextLine();
+                String line6= scanner1.nextLine();
+                String[] lines4 = line4.split(" ");
+                String[] lines5 = line6.split(" ");
+                String[] lines6 = line6.split(" ");
+                //System.out.println(Arrays.toString(lines4));
+                for(int i = 1 ; i<Math.min(Math.min(lines5.length,lines4.length), lines6.length) ; i++){
                     try{
-                        String[] mot1=lines1[i].split(":");
-                        String[] mot3=lines3[i].split(":");
+                        String[] mot1=lines4[i].split(":");
+                        String[] mot3=lines6[i].split(":");
                         if(!mot1[0].equals(("-"))&&!mot3[0].equals("-")){
-                            Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines3[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, false);
+                            Arete arete = new Arete(findBusStop(lines4[0]), findBusStop(lines6[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, false,new Ligne(1.0));
                             this.listArrete.add(arete);
                         }
                     }catch(Exception e) {
                         e.printStackTrace();
                     }
                     try{
-                        String[] mot2=lines2[i].split(":");
-                        String[] mot3=lines3[i].split(":");
+                        String[] mot2=lines5[i].split(":");
+                        String[] mot3=lines6[i].split(":");
                         if(!mot2[0].equals(("-"))&&!mot3[0].equals("-")) {
-                            Arete arete = new Arete(findBusStop(lines2[0]), findBusStop(lines3[0]), new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, false);
+                            Arete arete = new Arete(findBusStop(lines5[0]), findBusStop(lines6[0]), new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, false,new Ligne(1.0));
                             this.listArrete.add(arete);
                         }
                     }catch(Exception e) {
@@ -247,7 +243,7 @@ public class Graph {
                         String[] mot2=lines2[y].split(":");
                         try{
                             if(!mot1[0].equals(("-"))&&!mot2[0].equals("-")){
-                                Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, false);
+                                Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, false,new Ligne(1.0));
                                 this.listArrete.add(arete);
                             }
                         }catch(Exception e) {
@@ -257,18 +253,18 @@ public class Graph {
 
                     }}
                 scanner1.nextLine();
-                lines2=scanner1.nextLine().split(" ");
+                String lines234=scanner1.nextLine();
                 //System.out.println(Arrays.toString(lines2));
                 for(int i=0 ; i<8 ;i++){
 
-                    lines1=lines2;
-                    lines2=scanner1.nextLine().split(" ");
-                    for(int y = 1 ; y<lines1.length ; y++){
-                        String[] mot1=lines1[y].split(":");
-                        String[] mot2=lines2[y].split(":");
+                    String[] lines11=lines234.split(" ");
+                    String[] lines22=scanner1.nextLine().split(" ");
+                    for(int y = 1 ; y<Math.min(lines22.length, lines11.length) ; y++){
+                        String[] mot1=lines11[y].split(":");
+                        String[] mot2=lines22[y].split(":");
                         try{
                             if(!mot1[0].equals(("-"))&&!mot2[0].equals("-")){
-                                Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, false);
+                                Arete arete = new Arete(findBusStop(lines11[0]), findBusStop(lines22[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, false,new Ligne(1.0));
                                 this.listArrete.add(arete);
                             }
                         }catch(Exception e) {
@@ -277,24 +273,19 @@ public class Graph {
 
 
                     }}
-                lineLyceePoisy=null;
-                linesVernod=null;
-                linesPoisyCollege=null;
-                linesLyceePoisy=null;
-                linesVernod=null;
-                scanner1.nextLine();
-                linesVernod = scanner1.nextLine().split(" ");
-                String linePoisyCollege= scanner1.nextLine();
-                lineLyceePoisy= scanner1.nextLine();
-                linesPoisyCollege = linePoisyCollege.split(" ");
-                linesLyceePoisy = lineLyceePoisy.split(" ");
-                //System.out.println(Arrays.toString(linesLyceePoisy));
-                for(int i = 1 ; i<lines2.length ; i++){
+
+
+                String linePoisyCollege1= scanner1.nextLine();
+                String lineLyceePoisy1= scanner1.nextLine();
+                String[] linesVernod1 = scanner1.nextLine().split(" ");
+                String[] linesPoisyCollege1 = linePoisyCollege1.split(" ");
+                String[] linesLyceePoisy1 = lineLyceePoisy1.split(" ");
+                for(int i = 1 ; i<Math.min(Math.min(linesVernod1.length,linesPoisyCollege1.length), linesLyceePoisy1.length) ; i++){
                     try{
-                        String[] mot1=linesVernod[i].split(":");
-                        String[] mot3=linesPoisyCollege[i].split(":");
+                        String[] mot1=linesVernod1[i].split(":");
+                        String[] mot3=linesPoisyCollege1[i].split(":");
                         if(!mot1[0].equals(("-"))&&!mot3[0].equals("-")){
-                            Arete arete = new Arete(findBusStop(linesVernod[0]), findBusStop(linesPoisyCollege[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, false);
+                            Arete arete = new Arete(findBusStop(linesVernod1[0]), findBusStop(linesPoisyCollege1[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, false,new Ligne(1.0));
                             this.listArrete.add(arete);
                         }
                     }catch(Exception e) {
@@ -304,7 +295,7 @@ public class Graph {
                         String[] mot2=linesVernod[i].split(":");
                         String[] mot3=linesLyceePoisy[i].split(":");
                         if(!mot2[0].equals(("-"))&&!mot3[0].equals("-")) {
-                            Arete arete = new Arete(findBusStop(linesVernod[0]), findBusStop(linesLyceePoisy[0]), new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, false);
+                            Arete arete = new Arete(findBusStop(linesVernod[0]), findBusStop(linesLyceePoisy[0]), new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, new int[]{Integer.parseInt(mot3[0]), Integer.parseInt(mot3[1])}, false,new Ligne(1.0));
                             this.listArrete.add(arete);
                         }
                     }catch(Exception e) {
@@ -313,19 +304,18 @@ public class Graph {
                 }
             }
             if(!line0[1].equals("+")){
-
                 scanner1.nextLine();
-
-                String[] lines1=scanner1.nextLine().split(" ");
                 String[] lines2=scanner1.nextLine().split(" ");
-                //System.out.println(Arrays.toString(lines1));
                 for(int i=0 ; i<11 ;i++){
-                    for(int y = 1 ; y<lines1.length ; y++){
+                    String[] lines1=lines2;
+                    lines2=scanner1.nextLine().split(" ");
+                    //System.out.println(Arrays.toString(lines1));
+                    for(int y = 1 ; y< Math.min(lines2.length,lines1.length) ; y++){
                             String[] mot1=lines1[y].split(":");
                             String[] mot2=lines2[y].split(":");
                             try{
                                 if(!mot1[0].equals(("-"))&&!mot2[0].equals("-")){
-                                    Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, true);
+                                    Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, true,new Ligne(2.0));
                                     this.listArrete.add(arete);
                                 }
                             }catch(Exception e) {
@@ -334,17 +324,17 @@ public class Graph {
                     }
                     }
                 scanner1.nextLine();
-
-                lines1=scanner1.nextLine().split(" ");
                 lines2=scanner1.nextLine().split(" ");
                 //System.out.println(Arrays.toString(lines1));
                 for(int i=0 ; i<11 ;i++){
-                    for(int y = 1 ; y<lines1.length ; y++){
+                    String[] lines1=lines2;
+                    lines2=scanner1.nextLine().split(" ");
+                    for(int y = 1 ; y<Math.min(lines2.length,lines1.length) ; y++){
                         String[] mot1=lines1[y].split(":");
                         String[] mot2=lines2[y].split(":");
                         try{
                             if(!mot1[0].equals(("-"))&&!mot2[0].equals("-")){
-                                Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, true);
+                                Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, true,new Ligne(2.0));
                                 this.listArrete.add(arete);
                             }
                         }catch(Exception e) {
@@ -352,19 +342,20 @@ public class Graph {
                         }
                     }
                 }
-                scanner1.nextLine();
-                scanner1.nextLine();
-                scanner1.nextLine();
-                lines1=scanner1.nextLine().split(" ");
+                String test= scanner1.nextLine();
+                String test2= scanner1.nextLine();
+                //System.out.println(test);
+                //System.out.println(test2);
                 lines2=scanner1.nextLine().split(" ");
-                    //System.out.println(Arrays.toString(lines2));
                 for(int i=0 ; i<11 ;i++) {
-                    for (int y = 1; y < lines1.length; y++) {
+                    String[] lines1=lines2;
+                    lines2=scanner1.nextLine().split(" ");
+                    for (int y = 1; y < Math.min(lines2.length,lines1.length); y++) {
                         String[] mot1 = lines1[y].split(":");
                         String[] mot2 = lines2[y].split(":");
                         try {
                             if (!mot1[0].equals(("-")) && !mot2[0].equals("-")) {
-                                Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, false);
+                                Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, false,new Ligne(2.0));
                                 this.listArrete.add(arete);
                             }
                         } catch (Exception e) {
@@ -375,16 +366,17 @@ public class Graph {
                     }
                 }
                 scanner1.nextLine();
-                lines1=scanner1.nextLine().split(" ");
                 lines2=scanner1.nextLine().split(" ");
-                //System.out.println(Arrays.toString(lines2));
                 for(int i=0 ; i<11 ;i++) {
-                    for (int y = 1; y < lines2.length; y++) {
+                    String[] lines1=lines2;
+                    lines2=scanner1.nextLine().split(" ");
+                    //System.out.println(Arrays.toString(lines2));
+                    for (int y = 1; y < Math.min(lines2.length,lines1.length); y++) {
                         String[] mot1 = lines1[y].split(":");
                         String[] mot2 = lines2[y].split(":");
                         try {
                             if (!mot1[0].equals(("-")) && !mot2[0].equals("-")) {
-                                Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, false);
+                                Arete arete = new Arete(findBusStop(lines1[0]), findBusStop(lines2[0]), new int[]{Integer.parseInt(mot1[0]), Integer.parseInt(mot1[1])}, new int[]{Integer.parseInt(mot2[0]), Integer.parseInt(mot2[1])}, false,new Ligne(2.0));
                                 this.listArrete.add(arete);
                             }
                         } catch (Exception e) {
@@ -408,11 +400,34 @@ public class Graph {
     }
     public void displayArete(){
         for(Arete arete:listArrete){
-            try{
-            arete.display();
-            System.out.println(" ");}catch (Exception e){
+            try {
+                arete.display();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            System.out.println(" ");}
+        }
 
+    //algo dijkstra avec les distance=1
+    public void shortestPath(BusStop busStopDepart, BusStop busStopArrivee){
+        //initialisation
+        BusStop noeudCourant=busStopDepart;
+        double infini = Double.POSITIVE_INFINITY;
+        HashMap<BusStop, Double> noeudDistance = new HashMap<>();
+        noeudDistance.put(busStopDepart,0.0);
+        for(BusStop busStop : this.listBusStop){
+            if(!busStop.equals(busStopDepart))  noeudDistance.put(busStop,infini);
+        }
+        //Etape 1 mise à jour des distance
+        for(BusStop busStop:this.listBusStop){
+            if(noeudCourant.getListBusStopVoisin().contains(busStop)){
+                noeudDistance.replace(busStop,1.0);
             }
         }
+
+
+
+
     }
-}
+    }
+
