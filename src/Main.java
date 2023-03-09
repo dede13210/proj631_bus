@@ -1,5 +1,9 @@
+import reseaux_bus.BusStop;
 import reseaux_bus.Graph;
 import reseaux_bus.Ligne;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Main {
@@ -19,12 +23,16 @@ public class Main {
         reseau1.parseArrete(path1);
         reseau1.parseArrete(path2);
 
+        Map<BusStop,Integer> gps = reseau1.shortestPath(reseau1.findBusStop("GARE"),reseau1.findBusStop("Mandallaz"));
+
 
 
         //test
         //reseau1.displayBusStop();
+        for(BusStop busStop: gps.keySet())
+            System.out.println(busStop.getNom()+" "+gps.get(busStop));
         //System.out.println(reseau1.getListBusStop().size());
-        reseau1.displayArete();
+        //reseau1.displayArete();
         /*
         ligne1.displayLigne();
         System.out.println(" ");
