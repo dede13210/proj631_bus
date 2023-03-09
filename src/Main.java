@@ -23,14 +23,14 @@ public class Main {
         reseau1.parseArrete(path1);
         reseau1.parseArrete(path2);
 
-        Map<BusStop,Integer> gareVernod = reseau1.shortestPath(reseau1.findBusStop("Meythet_Le_Rabelais"),reseau1.findBusStop("Vernod"));
+        Map<BusStop,Integer> gps = reseau1.shortestPath(reseau1.findBusStop("GARE"),reseau1.findBusStop("Mandallaz"));
 
 
 
         //test
         //reseau1.displayBusStop();
-        /*for(BusStop busStop: gareVernod.keySet())
-            System.out.println(busStop.getNom()+" "+gareVernod.get(busStop));*/
+        for(BusStop busStop: gps.keySet())
+            System.out.println(busStop.getNom()+" "+gps.get(busStop));
         //System.out.println(reseau1.getListBusStop().size());
         //reseau1.displayArete();
         /*

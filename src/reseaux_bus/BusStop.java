@@ -1,4 +1,5 @@
 package reseaux_bus ;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -16,7 +17,7 @@ public class BusStop implements Comparable<BusStop> {
 		this.nom = nom;
 		this.ligne=new ArrayList<Double>();
 		this.listBusStopVoisin =new ArrayList<BusStop>();
-		distance=1;
+		this.distance=1;
 		}
 
 	public  void busStopVoisin(@NotNull ArrayList<BusStop> listBusStop){
@@ -82,7 +83,9 @@ public class BusStop implements Comparable<BusStop> {
 
 	@Override
 	public int compareTo(@NotNull BusStop o) {
-		return Integer.compare(this.distance,o.getDistance());
+		if(this.distance==o.getDistance()) return 0;
+		if (this.distance>o.getDistance()) return 1;
+		return -1;
 	}
 }
 
