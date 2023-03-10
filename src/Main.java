@@ -23,7 +23,7 @@ public class Main {
         reseau1.parseArrete(path1);
         reseau1.parseArrete(path2);
 
-        Map<BusStop,Integer> gps = reseau1.shortestPath(reseau1.findBusStop("GARE"),reseau1.findBusStop("Mandallaz"));
+        Map<BusStop,Integer> gps = reseau1.shortestPath(reseau1.findBusStop("POISY_COLLEGE"),reseau1.findBusStop("CAMPUS"));
 
 
 

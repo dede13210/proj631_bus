@@ -425,7 +425,7 @@ public class Graph {
     public Map<BusStop, Integer> shortestPath(BusStop busStopDepart, BusStop busStopArrivee) {
         //initialisation
         Map<BusStop, Integer> noeudDistance = new HashMap<>();
-        PriorityQueue<BusStop> listDePriorite = new PriorityQueue<>();
+        PriorityQueue<BusStop> noeudVisite = new PriorityQueue<>();
 
         // Initialisation des distances à l'infini sauf pour le point de départ
         for (BusStop busStop:listBusStop) {
@@ -435,41 +435,38 @@ public class Graph {
         busStopDepart.setDistance(0);
 
         // Ajout du point de départ dans la file de priorité
-        listDePriorite.add(busStopDepart);
+        noeudVisite.add(busStopDepart);
         ArrayList <BusStop> noeudAvisite = new ArrayList<>();
         noeudAvisite.addAll(this.listBusStop);
         noeudAvisite.remove(busStopDepart);
 
-        while (!listDePriorite.isEmpty() & !noeudAvisite.isEmpty()) {
-            BusStop current = listDePriorite.poll();
-            if(current.equals(null)){
+        while (noeudVisite.size()!=0 && noeudAvisite.size()!=0) {
+            BusStop current = noeudVisite.poll();
 
-
-            }
 
             //System.out.println(current.getNom()+" "+current.getDistance());
 
             // Parcours des voisins du nœud courant
             for (BusStop neighbor : current.getListBusStopVoisin()) {
-                if (noeudAvisite.contains(neighbor)){
+
                     BusStop nextNode=findBusStop(neighbor.getNom());
 
                     int newDistance = noeudDistance.get(current) + nextNode.getDistance();
+                    nextNode.setDistance(newDistance);
+                    noeudVisite.add(nextNode);
 
                     // Si la nouvelle distance est plus courte, on met à jour la distance et on ajoute le nœud dans la file de priorité
-                    if (newDistance <= noeudDistance.get(nextNode)) {
+                    if (newDistance < noeudDistance.get(nextNode)) {
                         noeudDistance.put(nextNode, newDistance);
-                        nextNode.setDistance(newDistance);
-                        listDePriorite.add(nextNode);
                         noeudAvisite.remove(nextNode);
-                }}
-            }
-        }
+                }
+
+        }}
         return noeudDistance;
 
 
 
 
-    }
-}
+
+}}
 
