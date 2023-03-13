@@ -488,5 +488,18 @@ public ArrayList<BusStop> ShortestPathItinerary(BusStop busStopDepart, BusStop b
 
     return itinerary;
 
-}}
+}
+
+/*public Map<BusStop,Double> fatestPath(BusStop busStopdepart,BusStop busStoparrive){
+        Map<BusStop,Double> noeudDistance = new HashMap<>();
+        PriorityQueue<BusStop> noeudVisite = new PriorityQueue<>();
+        ArrayList <BusStop> noeudAvisite = new ArrayList<>();
+        for(BusStop busStop:this.listBusStop){
+
+        }
+
+        return noeudDistance;
+}*/
+
+}
 
