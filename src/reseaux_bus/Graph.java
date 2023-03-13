@@ -3,7 +3,6 @@ package reseaux_bus;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.*;
 
 public class Graph {
@@ -422,7 +421,7 @@ public class Graph {
     }
 
     //algo dijkstra avec les distance=1
-    public Map<BusStop, Integer> shortestPath(BusStop busStopDepart, BusStop busStopArrivee) {
+    public Map<BusStop, Integer> shortestPath(BusStop busStopDepart) {
         //initialisation
         Map<BusStop, Integer> noeudDistance = new HashMap<>();
         PriorityQueue<BusStop> noeudVisite = new PriorityQueue<>();
@@ -467,6 +466,26 @@ public class Graph {
 
 
 
+
+}
+public ArrayList<BusStop> ShortestPathItinerary(BusStop busStopDepart, BusStop busStopArrive){
+    Map<BusStop,Integer> gps = shortestPath(busStopDepart);
+    ArrayList<BusStop> itinerary = new ArrayList<>();
+    itinerary.add(busStopArrive);
+    //System.out.println(itinerary.get(itinerary.size()-1).getNom());
+    while(gps.get(itinerary.get(itinerary.size()-1))!=0) {
+        for (BusStop busStop : gps.keySet()) {
+            for (BusStop neigboor : busStop.getListBusStopVoisin()) {
+                if (gps.get(findBusStop(neigboor.getNom())) < gps.get(findBusStop(busStop.getNom()))) {
+                    itinerary.add(neigboor);
+                }
+
+            }
+
+
+        }
+
+    }   return itinerary;
 
 }}
 

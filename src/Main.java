@@ -2,7 +2,7 @@ import reseaux_bus.BusStop;
 import reseaux_bus.Graph;
 import reseaux_bus.Ligne;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 
 
@@ -22,15 +22,20 @@ public class Main {
         reseau1.fusionBusStop();
         reseau1.parseArrete(path1);
         reseau1.parseArrete(path2);
-
-        Map<BusStop,Integer> gps = reseau1.shortestPath(reseau1.findBusStop("POISY_COLLEGE"),reseau1.findBusStop("CAMPUS"));
-
+        Map<BusStop,Integer> distanceMandallaz = reseau1.shortestPath(reseau1.findBusStop("Mandallaz"));
+        ArrayList<BusStop> itineraireGareVernod=reseau1.ShortestPathItinerary(reseau1.findBusStop("Vernod"),reseau1.findBusStop("GARE"));
 
 
         //test
+        /*for(BusStop busStop:distanceMandallaz.keySet()){
+            System.out.println(busStop.getNom()+" "+distanceMandallaz.get(busStop));
+        }*/
+
+
         //reseau1.displayBusStop();
-        for(BusStop busStop: gps.keySet())
-            System.out.println(busStop.getNom()+" "+gps.get(busStop));
+        for(BusStop busStop: itineraireGareVernod)
+            System.out.println(busStop.getNom());
+        System.out.println(itineraireGareVernod.size());
         //System.out.println(reseau1.getListBusStop().size());
         //reseau1.displayArete();
         /*
