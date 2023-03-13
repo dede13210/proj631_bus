@@ -22,19 +22,19 @@ public class Main {
         reseau1.fusionBusStop();
         reseau1.parseArrete(path1);
         reseau1.parseArrete(path2);
-        Map<BusStop,Integer> distanceMandallaz = reseau1.shortestPath(reseau1.findBusStop("Mandallaz"));
-        ArrayList<BusStop> itineraireGareVernod=reseau1.ShortestPathItinerary(reseau1.findBusStop("Vernod"),reseau1.findBusStop("GARE"));
+        Map<BusStop,Integer> distanceMandallaz = reseau1.shortestPath(reseau1.findBusStop("Vernod"));
+        ArrayList<BusStop> itineraireGareVernod=reseau1.ShortestPathItinerary(reseau1.findBusStop("Vernod"),reseau1.findBusStop("Bonlieu"));
 
 
         //test
-        /*for(BusStop busStop:distanceMandallaz.keySet()){
+        for(BusStop busStop:distanceMandallaz.keySet()){
             System.out.println(busStop.getNom()+" "+distanceMandallaz.get(busStop));
-        }*/
-
+        }
+        System.out.println(" ");
 
         //reseau1.displayBusStop();
         for(BusStop busStop: itineraireGareVernod)
-            System.out.println(busStop.getNom());
+            System.out.println(busStop.getNom()+" "+busStop.getLigne());
         System.out.println(itineraireGareVernod.size());
         //System.out.println(reseau1.getListBusStop().size());
         //reseau1.displayArete();

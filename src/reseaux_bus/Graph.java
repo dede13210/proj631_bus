@@ -474,18 +474,19 @@ public ArrayList<BusStop> ShortestPathItinerary(BusStop busStopDepart, BusStop b
     itinerary.add(busStopArrive);
     //System.out.println(itinerary.get(itinerary.size()-1).getNom());
     while(gps.get(itinerary.get(itinerary.size()-1))!=0) {
-        for (BusStop busStop : gps.keySet()) {
-            for (BusStop neigboor : busStop.getListBusStopVoisin()) {
-                if (gps.get(findBusStop(neigboor.getNom())) < gps.get(findBusStop(busStop.getNom()))) {
-                    itinerary.add(neigboor);
+        System.out.println(itinerary.get(itinerary.size()-1).getNom());
+        for (BusStop neighbor : itinerary.get(itinerary.size()-1).getListBusStopVoisin()) {
+            if (gps.get(findBusStop(neighbor.getNom())) < gps.get(itinerary.get(itinerary.size()-1))) {
+                itinerary.add(findBusStop(neighbor.getNom()));
                 }
 
             }
 
 
         }
+    Collections.reverse(itinerary);
 
-    }   return itinerary;
+    return itinerary;
 
 }}
 
